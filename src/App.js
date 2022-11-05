@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from './components/Header';
 import Dashboard from "./components/Dashboard";
 
-import Trainers from "./components/Trainers";
+import Trainers from "./components/Trainers/Trainers";
 
 function App() {
   return (
