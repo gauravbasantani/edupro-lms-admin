@@ -5,50 +5,35 @@ import { Link, NavLink } from 'react-router-dom'
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import Model from './Model';
+
 // let setdisplay = ''
 const Trainers = () => {
   let [datas, setDatas] = useState([]);
   let [data, setData] = useState({
+    _id:'',
     name:'',
     email:'',
+    mobileno:'',
     website:'',
     password:'',
-    status:'active',
+    status:'',
     tagline:'',
     gatewayid:''
   });
   const [show, setShow] = useState(false);
-  // const [shows, setShows] = useState(false);
-  // const [item, setItem] = useState
-
-
-  const [edit, setEdit] = useState();
-// if(setdisplay === 'add'){
-//   const handleDisplay= (e)=>{
-//     setEdit('Add');
-//   }
-// }
-// else{
-//   const handleDisplay=(e)=>{
-//   setEdit('Edit');
-// }
-// }
-
  
-  const handleClose = () => setShow(false);
-  const handleCloses = () => setShows(false);
+  const handleClose = () => {
+    setShow(false);
+    load();
+  };
+  // const handleCloses = () => setShows(false);
   const handleShow = (e, d) => {
-    if(d==={}
-    ){
-      axios.put("http://localhost:8081/admin/trainer").then()
+    if(d==={}){
+      setData({});
+    }else{
+      setData(d);
     }
-    setData(d);
     setShow(true);
-  }
-  const handleShows = () => {
-    setData({});
-    setShows(true);
   }
 
   function load(){
@@ -59,10 +44,43 @@ const Trainers = () => {
   }
   useEffect(()=>{
     load();
-  },[])
+  },[]);
+  const handleChange = (e) =>{
+    const newData = {...data}
+    newData[e.target.id] = e.target.value
+    setData(newData)
+  }
+
+  function handleSubmit(e){
+    e.preventDefault();
+    let body = {
+      id:data._id,
+      name:data.name,
+      email:data.email,
+      mobileno:data.mobileno,
+      website:data.website,
+      password:data.password,
+      status:data.status,
+      tagline:data.tagline,
+      gatewayid:data.gatewayid
+    };
+    console.log(body);
+    if(data._id === undefined){
+    axios.put('http://localhost:8081/admin/trainer',body).then((res)=>{
+      console.log(res.data.data);
+      handleClose(true);
+    })
+  }
+  else{
+    axios.post('http://localhost:8081/admin/trainer',body).then((res)=>{
+      console.log(res.data.data);
+      handleClose(true);
+    })
+  }
+  }
   function deletetrainer(e, id){
     e.preventDefault();
-    axios.post("https://react-ecomm-mern.herokuapp.com/productcategory/delete", {data:{id:id}}).then((res)=>{
+    axios.delete("http://localhost:8081/admin/trainer", {data:{id:id}}).then((res)=>{
       load();
     })
   }
@@ -88,8 +106,7 @@ const Trainers = () => {
           <th>Email</th>
           <th>Mobile Number</th>
           <th>Website</th>
-          <th>Password</th>
-         
+          <th>Password</th>         
           <th>Status</th>
           <th>Tagline</th>
           <th>Gateway ID</th>
@@ -99,9 +116,7 @@ const Trainers = () => {
         {
           datas.map((d)=>{
             return(
-              <>
-             
-              <tr className='mx-5'>
+              <tr className='mx-5' key={ d._id }>
              
                 <td className='px-3 mx-3'>
                   <button className="btn btn-primary " onClick={(e)=>{handleShow(e, d)}} >Edit </button>
@@ -111,14 +126,13 @@ const Trainers = () => {
                 <td>{d.name}</td>             
                 <td>{d.email}</td>
                 <td>{d.mobileno}</td>
-                <td>{d.web_name}</td>
+                <td>{d.website}</td>
                 <td>{d.password}</td>
-                <td></td>
-                <td>{d.tag_line}</td>
-                <td>{d.gateway_id}</td>
+                <td>{d.status}</td>
+                <td>{d.tagline}</td>
+                <td>{d.gatewayid}</td>
                 
               </tr>
-              </>
             )
           })
         }
@@ -139,25 +153,33 @@ const Trainers = () => {
                 type="hidden"
                 value={data._id}
                 placeholder=""
-                autoFocus
+                id='_id'
+                name='_id'
+                onChange={(e)=>handleChange(e) }
               />
             <Row>
               <Col md={6}>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+            <Form.Group className="mb-3">
               <Form.Label>Name</Form.Label>
               <Form.Control
                 type="text"
+                id='name'
+                name='name'
                 value={data.name}
+                onChange={(e)=>handleChange(e) }
                 placeholder=""
                 autoFocus
               />
             </Form.Group>
             </Col>
             <Col md={6}>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+            <Form.Group className="mb-3">
               <Form.Label>Email address</Form.Label>
               <Form.Control
+                id='email'
                 type="email"
+                name='email'
+                onChange={(e)=>handleChange(e) }
                 value={data.email}
                 placeholder="name@example.com"
                 autoFocus
@@ -167,51 +189,78 @@ const Trainers = () => {
             </Row>
             <Row>
             <Col md={6}>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+            <Form.Group className="mb-3">
               <Form.Label>Mobile Number</Form.Label>
               <Form.Control
+              name='mobileno'
+              id='mobileno'
               value={data.mobileno}
                 type="number"
                 placeholder=""
+                onChange={(e)=>handleChange(e) }
                 autoFocus
               />
             </Form.Group>
             </Col>
             <Col md={6}>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+            <Form.Group className="mb-3">
               <Form.Label>Website</Form.Label>
               <Form.Control
-                value={data.wesbsite}
+                value={data.website}
+                id='website'
                 type="text"
+                name='website'
+                onChange={(e)=>handleChange(e) }
                 placeholder="name@example.com"
                 autoFocus
               />
             </Form.Group>
             </Col>
             </Row>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+            <Form.Group className="mb-3">
               <Form.Label>Password</Form.Label>
               <Form.Control
                 value={data.password}
                 type="text"
+                id='password'
+                name='password'
                 placeholder=""
+                onChange={(e)=>handleChange(e) }
                 autoFocus
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+            <Form.Group className="mb-3">
               <Form.Label>Status</Form.Label>
               <Form.Control
                 type="text"
+                name='status'
+                id='status'
+                onChange={(e)=>handleChange(e) }
                 value={data.status}
                 autoFocus
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+            <Form.Group className="mb-3">
               <Form.Label>Tagline </Form.Label>
               <Form.Control
                 type="text"
-                value={data.tag_line}
+                value={data.tagline}
+                name='tagline'
+                id='tagline'
                 placeholder=""
+                onChange={(e)=>handleChange(e) }
+                autoFocus
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Gateway ID</Form.Label>
+              <Form.Control
+                type="text"
+                value={data.gatewayid}
+                name='gatewayid'
+                id='gatewayid'
+                placeholder=""
+                onChange={(e)=>handleChange(e) }
                 autoFocus
               />
             </Form.Group>
@@ -222,8 +271,8 @@ const Trainers = () => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
+          <Button variant="primary" onClick={(e)=>handleSubmit(e)}>
+            Save
           </Button>
         </Modal.Footer>
       </Modal>      
