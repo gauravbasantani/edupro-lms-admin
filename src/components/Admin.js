@@ -2,7 +2,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Col, Container, Row, Table } from 'react-bootstrap';
-import { Link, NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
@@ -82,7 +82,7 @@ const Admin = () => {
      <div className='container'>
       <div className='breadcrumbs'>
         <p className='bread'>
-          <NavLink to='/'><span Link to='/'>  Admin </span></NavLink>/
+          <Link to='/'><span Link to='/'>  Admin </span></Link>/
           <span >Admin</span> 
           </p>
       </div>

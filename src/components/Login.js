@@ -13,6 +13,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
+import { useNavigate } from 'react-router';
 
 function Copyright(props) {
 
@@ -49,11 +50,16 @@ export default function Login() {
       email : data.email,
       password : data.password    
     }).then((res)=>{
-      console.log(res.data);
+      console.log(res.data.data.name);
+      if(res.data.status === 'success'){
+        localStorage.setItem('usertype','admin');
+        localStorage.setItem('name',res.data.data.name);
+        navigate('/dashboard');
+      }
     })
   }
       
-  
+  let navigate = useNavigate();
 
   return (
     <ThemeProvider theme={theme}>

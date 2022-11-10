@@ -1,10 +1,11 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Col, Container, Row, Table } from 'react-bootstrap';
-import { Link, NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import './trainer.css'
 
 // let setdisplay = ''
 const Trainers = () => {
@@ -89,7 +90,7 @@ const Trainers = () => {
      <div className='container'>
       <div className='breadcrumbs'>
         <p className='bread'>
-          <NavLink to='/'><span Link to='/'>  Admin </span></NavLink>/
+          <span >  Admin </span>/
           <span >Trainers</span> 
           </p>
       </div>
@@ -97,19 +98,19 @@ const Trainers = () => {
       <div className='text-right'>
       <Button  className='btn btn-primary' onClick={(e)=>{handleShow(e, {})}}>Add</Button>
       </div>
-      <div className='container mt-3'>
-      <Table responsive class="table table-bordered bordered table-stripped">
-        <thead>
-          <tr>
-          <th>Action</th>
+      <div className='container header mt-3'>
+      <Table  responsive="lg" className="table table-bordered stripped bordered">
+        <thead className='text-center'>
+          <tr >
+          <th className='heading'>Action</th>
           <th>Name</th>
           <th>Email</th>
-          <th>Mobile Number</th>
+          <th style={{width:'200px'}}>Mobile Number</th>
           <th>Website</th>
           <th>Password</th>         
           <th>Status</th>
           <th>Tagline</th>
-          <th>Gateway ID</th>
+          <th style={{width:'150px'}}>Gateway ID</th>
           </tr>
         </thead>
         <tbody>
@@ -118,9 +119,9 @@ const Trainers = () => {
             return(
               <tr className='mx-5' key={ d._id }>
              
-                <td className='px-3 mx-3'>
-                  <button className="btn btn-primary " onClick={(e)=>{handleShow(e, d)}} >Edit </button>
-                  <button className="btn btn-danger" onClick={(e)=>deletetrainer(e,d._id)} >Delete</button>
+                <td style={{width:'200px'}}>
+                  <button className="btn btn-primary "style={{margin:'5px'}} onClick={(e)=>{handleShow(e, d)}} ><i className='fa fa-pencil'></i></button>
+                  <button className="btn btn-danger " onClick={(e)=>deletetrainer(e,d._id)} ><i className='fa fa-trash-o'></i></button>
                 </td>
                
                 <td>{d.name}</td>             
