@@ -82,18 +82,25 @@ const Admin = () => {
      <div className='container'>
       <div className='breadcrumbs'>
         <p className='bread'>
-          <Link to='/'><span Link to='/'>  Admin </span></Link>/
+          <span >  Home </span>/
           <span >Admin</span> 
           </p>
       </div>
       <h1>Admin</h1>
-      <div className='text-right'>
+      <div className='container'>
+      <div className="row">
+        <div className="col-lg-6">
+
+        </div>
+        <div className="col-lg-6 text-end">
       <Button  className='btn btn-primary' onClick={(e)=>{handleShow(e, {})}}>Add</Button>
+        </div>
+        </div>  
       </div>
       <div className='container mt-3'>
-      <Table responsive class="table table-bordered bordered table-stripped">
-        <thead>
-          <tr>
+      <Table responsive class="table stripped table-bordered  bordered">
+        <thead className='text-center'>
+          <tr >
           <th>Action</th>
           <th>Name</th>
           <th>Email</th>
@@ -104,11 +111,11 @@ const Admin = () => {
         {
           datas.map((d)=>{
             return(
-              <tr className='mx-5' key={ d._id }>
+              <tr className='mx-5 text-center' key={ d._id }>
              
-                <td className='px-3 mx-3'>
-                  <button className="btn btn-primary " onClick={(e)=>{handleShow(e, d)}} >Edit </button>
-                  <button className="btn btn-danger" onClick={(e)=>deletetrainer(e,d._id)} >Delete</button>
+                <td  style={{width:'200px'}}>
+                  <button className="btn btn-primary " style={{margin:'5px'}} onClick={(e)=>{handleShow(e, d)}} >Edit </button>
+                  <button className="btn btn-danger"  onClick={(e)=>deletetrainer(e,d._id)} >Delete</button>
                 </td>
                
                 <td>{d.name}</td>             

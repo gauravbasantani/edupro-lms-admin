@@ -79,24 +79,39 @@ const Trainers = () => {
     })
   }
   }
-  function deletetrainer(e, id){
+  function deletetrainer(e,id) {
     e.preventDefault();
-    axios.delete("http://localhost:8081/admin/trainer", {data:{id:id}}).then((res)=>{
+    var r = window.confirm(`Are you sure you want to delete!`);
+    if (r) {
+      axios.delete("http://localhost:8081/admin/trainer", {data:{id:id}}).then((res)=>{
       load();
     })
+      window.location.href = "/";
+    }
   }
+  // function deletetrainer(e, id){
+  //   e.preventDefault();
+   
+  // }
   return (
     <div>
      <div className='container'>
       <div className='breadcrumbs'>
         <p className='bread'>
-          <span >  Admin </span>/
+          <span >  Home </span>/
           <span >Trainers</span> 
           </p>
       </div>
       <h1>Trainers</h1>
-      <div className='text-right'>
+      <div className='container'>
+      <div className="row">
+        <div className="col-lg-6">
+
+        </div>
+        <div className="col-lg-6 text-end">
       <Button  className='btn btn-primary' onClick={(e)=>{handleShow(e, {})}}>Add</Button>
+        </div>
+        </div>  
       </div>
       <div className='container header mt-3'>
       <Table  responsive="lg" className="table table-bordered stripped bordered">
@@ -117,9 +132,9 @@ const Trainers = () => {
         {
           datas.map((d)=>{
             return(
-              <tr className='mx-5' key={ d._id }>
+              <tr  className='mx-5 text-center' key={ d._id }>
              
-                <td style={{width:'200px'}}>
+                <td  style={{width:'300px'}}>
                   <button className="btn btn-primary "style={{margin:'5px'}} onClick={(e)=>{handleShow(e, d)}} ><i className='fa fa-pencil'></i></button>
                   <button className="btn btn-danger " onClick={(e)=>deletetrainer(e,d._id)} ><i className='fa fa-trash-o'></i></button>
                 </td>
@@ -157,6 +172,7 @@ const Trainers = () => {
                 id='_id'
                 name='_id'
                 onChange={(e)=>handleChange(e) }
+                autoFocus
               />
             <Row>
               <Col md={6}>
