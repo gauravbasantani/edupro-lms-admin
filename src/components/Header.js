@@ -31,7 +31,7 @@ const Header = () => {
             >
               <span className="navbar-toggler-icon"></span>
             </button>
-            <div className="collapse navbar-collapse " id="navbarNav">
+            <div className="collapse navbar-collapse d-flex" id="navbarNav">
               <ul className="navbar-nav ">
                 <li className="nav-item">
                   <Link
@@ -53,19 +53,21 @@ const Header = () => {
                   </Link>
                 </li>
                 
-                  <li className="nav-item text-right">
+                  {/* <li className="nav-item">
                     <Link to="/trainers" className="nav-link">
                       Change Password
                     </Link>
-                  </li>
-                  <li className="nav-item">
+                  </li> */}
+              
+                  <li className="nav-item justify-content-end">
                     <Link to="/" className="nav-link" onClick={logout}>
                       Log Out
                     </Link>
                   </li>
-              
               </ul>
+              
             </div>
+           
           </div>
         </nav>
       </div>

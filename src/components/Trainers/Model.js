@@ -61,6 +61,8 @@ const Model = (props) => {
             </Form.Group>
             </Col>
             </Row>
+            <Row>
+            <Col md={6}>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Password</Form.Label>
               <Form.Control
@@ -69,6 +71,8 @@ const Model = (props) => {
                 autoFocus
               />
             </Form.Group>
+            </Col>
+            <Col md={6}>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Status</Form.Label>
               <Form.Control
@@ -77,6 +81,9 @@ const Model = (props) => {
                 autoFocus
               />
             </Form.Group>
+            </Col>
+            </Row>
+            <Row></Row>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Tagline </Form.Label>
               <Form.Control

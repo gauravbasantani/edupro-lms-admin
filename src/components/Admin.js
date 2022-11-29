@@ -98,7 +98,7 @@ const Admin = () => {
         </div>  
       </div>
       <div className='container mt-3'>
-      <Table responsive class="table stripped table-bordered  bordered">
+      <Table responsive class="table  table-bordered  adminTable">
         <thead className='text-center'>
           <tr >
           <th>Action</th>
@@ -113,9 +113,9 @@ const Admin = () => {
             return(
               <tr className='mx-5 text-center' key={ d._id }>
              
-                <td  style={{width:'200px'}}>
-                  <button className="btn btn-primary " style={{margin:'5px'}} onClick={(e)=>{handleShow(e, d)}} >Edit </button>
-                  <button className="btn btn-danger"  onClick={(e)=>deletetrainer(e,d._id)} >Delete</button>
+                <td >
+                  <button className="btn btn-primary " style={{margin:'5px'}} onClick={(e)=>{handleShow(e, d)}} ><i className='fa fa-pencil'></i> </button>
+                  <button className="btn btn-danger"  onClick={(e)=>deletetrainer(e,d._id)} ><i className='fa fa-trash-o'></i></button>
                 </td>
                
                 <td>{d.name}</td>             
