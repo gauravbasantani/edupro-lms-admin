@@ -59,12 +59,17 @@ const Header = () => {
                     </Link>
                   </li> */}
               
-                  <li className="nav-item justify-content-end">
+                  {/* <li className="nav-item justify-content-end">
                     <Link to="/" className="nav-link" onClick={logout}>
                       Log Out
                     </Link>
-                  </li>
+                  </li> */}
               </ul>
+              <span className="ms-auto" style={{color:"#FFFFFF8C",marginRight:"20px"}}>
+                <Link to="/" className="nav-link" onClick={logout}>
+                      Log Out
+                    </Link>
+              </span>
               
             </div>
            

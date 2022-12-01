@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Col, Container, Row, Table } from 'react-bootstrap';
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
@@ -143,7 +143,7 @@ const Trainers = () => {
                       <td style={{ width: '300px', whiteSpace: "nowrap" }}>{d.name}</td>
                       <td>{d.email}</td>
                       <td>{d.mobileno}</td>
-                      <td>{d.website}</td>
+                      <td><Link to={d.website}>{d.website}</Link></td>
                       <td>{d.password}</td>
                       <td>{d.status}</td>
                       <td>{d.tagline}</td>
