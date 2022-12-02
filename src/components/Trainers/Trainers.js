@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Col, Container, Row, Table } from 'react-bootstrap';
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
@@ -17,7 +17,7 @@ const Trainers = () => {
     mobileno: '',
     website: '',
     password: '',
-    status: 'Active',
+    status: '',
     tagline: '',
     gatewayid: ''
   });
@@ -38,7 +38,7 @@ const Trainers = () => {
   }
 
   function load() {
-    axios.get('http://localhost:8081/admin/trainer').then((res) => {
+    axios.get('https://node-lms.onrender.com/admin/trainer').then((res) => {
       console.log(res.data);
       setDatas(res.data.data)
     })
@@ -49,6 +49,7 @@ const Trainers = () => {
   const handleChange = (e) => {
     const newData = { ...data }
     newData[e.target.id] = e.target.value
+    //console.log(newData)
     setData(newData)
   }
 
@@ -67,13 +68,15 @@ const Trainers = () => {
     };
     console.log(body);
     if (data._id === undefined) {
-      axios.put('http://localhost:8081/admin/trainer', body).then((res) => {
+      axios.put('https://node-lms.onrender.com/admin/trainer', body).then((res) => {
         console.log(res.data.data);
         handleClose(true);
+      }, (err)=>{
+        console.log(err);
       })
     }
     else {
-      axios.post('http://localhost:8081/admin/trainer', body).then((res) => {
+      axios.post('https://node-lms.onrender.com/admin/trainer', body).then((res) => {
         console.log(res.data.data);
         handleClose(true);
       })
@@ -83,10 +86,10 @@ const Trainers = () => {
     e.preventDefault();
     var r = window.confirm(`Are you sure you want to delete!`);
     if (r) {
-      axios.delete("http://localhost:8081/admin/trainer", { data: { id: id } }).then((res) => {
+      axios.delete("https://node-lms.onrender.com/admin/trainer", { data: { id: id } }).then((res) => {
         load();
       })
-      window.location.href = "/";
+      // window.location.href = "/";
     }
   }
   // function deletetrainer(e, id){
@@ -143,7 +146,7 @@ const Trainers = () => {
                       <td style={{ width: '300px', whiteSpace: "nowrap" }}>{d.name}</td>
                       <td>{d.email}</td>
                       <td>{d.mobileno}</td>
-                      <td><Link to={d.website}>{d.website}</Link></td>
+                      <td><NavLink target='_blank' to={d.website}>{d.website}</NavLink></td>
                       <td>{d.password}</td>
                       <td>{d.status}</td>
                       <td>{d.tagline}</td>
@@ -255,7 +258,7 @@ const Trainers = () => {
                 <Col md={6}>
                   <fieldset>
                     <Form.Group className="mb-3">
-                      <Form.Label htmlFor="disabledSelect">Status</Form.Label>
+                      <Form.Label htmlFor="status">Status</Form.Label>
                       <Form.Select onChange={(e) => { handleChange(e) }} value={data.status} id="status">
                         <option value='Active'>Active</option>
                         <option value='Offline'>Offline</option>

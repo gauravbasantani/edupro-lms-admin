@@ -50,7 +50,7 @@ export default function Login() {
   }
   function submit(e) {
     e.preventDefault();
-    axios.post('http://localhost:8081/admin/authentication/login',{
+    axios.post('https://node-lms.onrender.com/admin/authentication/login',{
       email : data.email,
       password : data.password    
     }).then((res)=>{

@@ -35,7 +35,7 @@ const Admin = () => {
     setShow(true);
   }
   function load(){
-    axios.get('http://localhost:8081/admin/admin').then((res)=>{
+    axios.get('https://node-lms.onrender.com/admin/admin').then((res)=>{
       console.log(res.data);
       setDatas(res.data.data)
     })
@@ -59,13 +59,13 @@ const Admin = () => {
     };
     console.log(body);
     if(data._id === undefined){
-    axios.put('http://localhost:8081/admin/admin',body).then((res)=>{
+    axios.put('https://node-lms.onrender.com/admin/admin',body).then((res)=>{
       console.log(res.data.data);
       handleClose(true);
     })
   }
   else{
-    axios.post('http://localhost:8081/admin/admin',body).then((res)=>{
+    axios.post('https://node-lms.onrender.com/admin/admin',body).then((res)=>{
       console.log(res.data.data);
       handleClose(true);
     })
@@ -73,7 +73,7 @@ const Admin = () => {
   }
   function deletetrainer(e, id){
     e.preventDefault();
-    axios.delete("http://localhost:8081/admin/admin", {data:{id:id}}).then((res)=>{
+    axios.delete("https://node-lms.onrender.com/admin/admin", {data:{id:id}}).then((res)=>{
       load();
     })
   }
