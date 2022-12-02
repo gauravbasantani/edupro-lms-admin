@@ -14,6 +14,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
 import { useNavigate } from 'react-router';
+import { Tooltip } from '@material-ui/core';
 
 function Copyright(props) {
 
@@ -59,7 +60,11 @@ export default function Login() {
         localStorage.setItem('usertype','admin');
         localStorage.setItem('name',res.data.data.name);
         navigate('/dashboard');
+      }else{
+        alert("Invalid Credentials");
       }
+    }, (err)=>{
+      console.log(err);
     })
   }
       
@@ -82,6 +87,7 @@ export default function Login() {
             Edupro Admin Login
           </Typography>
           <Box component="form"  noValidate sx={{ mt: 1 }}>
+            <Tooltip title='email:admin@admin.com'>
             <TextField
               margin="normal"
               required
@@ -94,6 +100,8 @@ export default function Login() {
               value={data.email}
               onChange={(e)=>{handle(e);}}
             />
+            </Tooltip>
+            <Tooltip title='password:admin'>
             <TextField
               margin="normal"
               required
@@ -106,7 +114,7 @@ export default function Login() {
               autoComplete="current-password"
               onChange={(e)=>{handle(e);}}
             />
-            
+            </Tooltip>
             <Button
               type="submit"
               onClick={(e)=>{submit(e)}}

@@ -146,7 +146,7 @@ const Trainers = () => {
                       <td style={{ width: '300px', whiteSpace: "nowrap" }}>{d.name}</td>
                       <td>{d.email}</td>
                       <td>{d.mobileno}</td>
-                      <td><NavLink target='_blank' to={d.website}>{d.website}</NavLink></td>
+                      <td><a target='_blank' href={d.website}>{d.website}</a></td>
                       <td>{d.password}</td>
                       <td>{d.status}</td>
                       <td>{d.tagline}</td>
